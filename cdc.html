@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cahier des Charges - VoyageBJ</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 2cm;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #2c5aa0;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2c5aa0;
+        }
+        
+        .project-title {
+            font-size: 28px;
+            color: #2c5aa0;
+            margin: 10px 0;
+        }
+        
+        .section {
+            margin-bottom: 30px;
+            page-break-inside: avoid;
+        }
+        
+        .section-title {
+            background-color: #2c5aa0;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        
+        .priority-high {
+            background-color: #ffebee;
+            color: #c62828;
+            font-weight: bold;
+        }
+        
+        .priority-medium {
+            background-color: #fff3e0;
+            color: #ef6c00;
+        }
+        
+        .priority-low {
+            background-color: #e8f5e8;
+            color: #2e7d32;
+        }
+        
+        .code-block {
+            background-color: #f5f5f5;
+            border-left: 4px solid #2c5aa0;
+            padding: 15px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+        }
+        
+        .checklist {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .checklist li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .checklist li:before {
+            content: "☐ ";
+            margin-right: 10px;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .tags {
+            margin-top: 20px;
+        }
+        
+        .tag {
+            display: inline-block;
+            background-color: #e3f2fd;
+            color: #2c5aa0;
+            padding: 5px 10px;
+            margin: 2px;
+            border-radius: 3px;
+            font-size: 12px;
+        }
+        
+        @media print {
+            body {
+                padding: 0;
+            }
+            
+            .section {
+                page-break-inside: avoid;
+            }
+            
+            .no-break {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">VOYAGEBJ</div>
+        <h1 class="project-title">Cahier des Charges Technique</h1>
+        <p>Plateforme de Réservation de Billets de Transport</p>
+        <p><strong>Version 1.0 - Bêta</strong></p>
+    </div>
+
+    <div class="section">
+        <h2 class="section-title">📋 Table des Matières</h2>
+        <ul>
+            <li><a href="#contexte">Contexte et Objectifs</a></li>
+            <li><a href="#portee">Portée du Projet</a></li>
+            <li><a href="#fonctionnalites">Fonctionnalités Principales</a></li>
+            <li><a href="#architecture">Architecture Technique</a></li>
+            <li><a href="#deploiement">Environnements et Déploiement</a></li>
+            <li><a href="#standards">Standards de Développement</a></li>
+            <li><a href="#planning">Planning et Livrables</a></li>
+            <li><a href="#contribution">Contribution</a></li>
+			<li><a href="doc.html">Documentation Technique du Projet (Readme)</a></li>
+        </ul>
+    </div>
+
+    <div id="contexte" class="section">
+        <h2 class="section-title">🎯 Contexte et Objectifs</h2>
+        <h3>Contexte</h3>
+        <p><strong>VoyageBJ</strong> est une plateforme numérique visant à révolutionner l'expérience de réservation de billets de transport au Bénin. Face aux défis logistiques rencontrés par les voyageurs, notre solution digitale propose une alternative moderne et efficace.</p>
+        
+        <h3>Objectifs Stratégiques</h3>
+        <ul>
+            <li><strong>Centraliser</strong> l'offre de transport terrestre au Bénin</li>
+            <li><strong>Digitaliser</strong> le processus de réservation et de paiement</li>
+            <li><strong>Faciliter</strong> la planification des voyages interurbains</li>
+            <li><strong>Sécuriser</strong> les transactions financières</li>
+            <li><strong>Optimiser</strong> la gestion des compagnies de transport</li>
+        </ul>
+    </div>
+
+    <div id="portee" class="section">
+        <h2 class="section-title">🎯 Portée du Projet</h2>
+        
+        <h3>Inclus dans le Scope (v1.0)</h3>
+        <ul>
+            <li>Plateforme web responsive</li>
+            <li>Système de réservation en temps réel</li>
+            <li>Module de paiement sécurisé</li>
+            <li>Gestion multi-compagnies</li>
+            <li>Interface administrateur</li>
+            <li>Tableaux de bord analytiques</li>
+        </ul>
+        
+        <h3>Hors Scope (v1.0)</h3>
+        <ul>
+            <li>Application mobile native</li>
+            <li>Système de fidélisation</li>
+            <li>Intégration internationale</li>
+            <li>Services logistiques additionnels</li>
+        </ul>
+    </div>
+
+    <div id="fonctionnalites" class="section">
+        <h2 class="section-title">⚙️ Fonctionnalités Principales</h2>
+        
+        <h3>Module Utilisateur</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Fonctionnalité</th>
+                    <th>Description</th>
+                    <th>Priorité</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Inscription/Connexion</strong></td>
+                    <td>Authentification sécurisée avec validation email</td>
+                    <td class="priority-high">Élevée</td>
+                </tr>
+                <tr>
+                    <td><strong>Recherche de trajets</strong></td>
+                    <td>Moteur de recherche avec filtres avancés</td>
+                    <td class="priority-high">Élevée</td>
+                </tr>
+                <tr>
+                    <td><strong>Réservation</strong></td>
+                    <td>Sélection sièges + informations voyageurs</td>
+                    <td class="priority-high">Élevée</td>
+                </tr>
+                <tr>
+                    <td><strong>Paiement</strong></td>
+                    <td>Intégration gateway de paiement (Mobile Money, Carte)</td>
+                    <td class="priority-high">Élevée</td>
+                </tr>
+                <tr>
+                    <td><strong>Gestion réservations</strong></td>
+                    <td>Historique et annulations</td>
+                    <td class="priority-medium">Moyenne</td>
+                </tr>
+                <tr>
+                    <td><strong>Notifications</strong></td>
+                    <td>SMS/Email de confirmation et rappels</td>
+                    <td class="priority-medium">Moyenne</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <h3>Module Administrateur</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Fonctionnalité</th>
+                    <th>Description</th>
+                    <th>Priorité</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Gestion compagnies</strong></td>
+                    <td>CRUD opérateurs transport</td>
+                    <td class="priority-high">Élevée</td>
+                </tr>
+                <tr>
+                    <td><strong>Gestion trajets</strong></td>
+                    <td>Configuration horaires et tarifs</td>
+                    <td class="priority-high">Élevée</td>
+                </tr>
+                <tr>
+                    <td><strong>Reporting</strong></td>
+                    <td>Analytics ventes et occupation</td>
+                    <td class="priority-medium">Moyenne</td>
+                </tr>
+                <tr>
+                    <td><strong>Gestion utilisateurs</strong></td>
+                    <td>Modération et support</td>
+                    <td class="priority-low">Faible</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="architecture" class="section">
+        <h2 class="section-title">🏗️ Architecture Technique</h2>
+        
+        <h3>Stack Technologique</h3>
+        <div class="code-block">
+Frontend:
+  - React.js 18+ / TypeScript
+  - Tailwind CSS
+  - Redux Toolkit (State Management)
+  - React Query (Data Fetching)
+
+Backend:
+  - Node.js / Express.js
+  - PostgreSQL (Base de données)
+  - Redis (Cache et sessions)
+  - JWT (Authentification)
+
+Infrastructure:
+  - Docker / Docker Compose
+  - AWS EC2 (Hébergement)
+  - Nginx (Reverse Proxy)
+  - PM2 (Process Management)
+        </div>
+        
+        <h3>Structure de la Base de Données</h3>
+        <div class="code-block">
+-- Tables principales
+users (id, email, phone, password_hash, profile_data)
+companies (id, name, contact_info, status)
+routes (id, departure_city, arrival_city, distance, duration)
+trips (id, route_id, company_id, departure_time, arrival_time, price)
+bookings (id, user_id, trip_id, seats, total_amount, status)
+payments (id, booking_id, method, amount, status, transaction_id)
+        </div>
+    </div>
+
+    <div id="deploiement" class="section">
+        <h2 class="section-title">🚀 Environnements et Déploiement</h2>
+        
+        <h3>Environnements</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Environnement</th>
+                    <th>URL</th>
+                    <th>Usage</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Development</strong></td>
+                    <td>dev.voyagebj.bj</td>
+                    <td>Développement features</td>
+                </tr>
+                <tr>
+                    <td><strong>Staging</strong></td>
+                    <td>staging.voyagebj.bj</td>
+                    <td>Tests et validation</td>
+                </tr>
+                <tr>
+                    <td><strong>Production</strong></td>
+                    <td>voyagebj.bj</td>
+                    <td>Environnement live</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <h3>Workflow de Déploiement</h3>
+        <ol>
+            <li><strong>Development</strong> → Merge requests sur `develop`</li>
+            <li><strong>Staging</strong> → Déploiement automatique depuis `staging`</li>
+            <li><strong>Production</strong> → Releases taggées sur `main`</li>
+        </ol>
+    </div>
+
+    <div id="standards" class="section">
+        <h2 class="section-title">📏 Standards de Développement</h2>
+        
+        <h3>Code Convention</h3>
+        <ul>
+            <li><strong>Frontend</strong>: ESLint + Prettier config</li>
+            <li><strong>Backend</strong>: Standard.js</li>
+            <li><strong>Commit Messages</strong>: Convention Angular</li>
+            <li><strong>Branches</strong>: GitFlow workflow</li>
+        </ul>
+        
+        <h3>Exemple Structure Commit</h3>
+        <div class="code-block">
+feat: add user registration endpoint
+fix: resolve payment gateway timeout
+docs: update API documentation
+        </div>
+        
+        <h3>Tests Requis</h3>
+        <ul>
+            <li><strong>Unit Tests</strong>: Jest (Couverture > 80%)</li>
+            <li><strong>Integration Tests</strong>: Supertest (API)</li>
+            <li><strong>E2E Tests</strong>: Cypress (Critical paths)</li>
+        </ul>
+    </div>
+
+    <div id="planning" class="section">
+        <h2 class="section-title">📅 Planning et Livrables</h2>
+        
+        <h3>Version 1.0 (Beta) - Date Cible: 31 Décembre 2025</h3>
+        
+        <h4>Sprint 1 (30 Jours) - Fondations</h4>
+        <ul class="checklist">
+            <li>Setup environnement dev</li>
+            <li>Architecture base de données</li>
+            <li>Authentification utilisateur</li>
+            <li>CRUD compagnies transport</li>
+        </ul>
+        
+        <h4>Sprint 2 (30 Jours) - Core Features</h4>
+        <ul class="checklist">
+            <li>Module recherche trajets</li>
+            <li>Système réservation</li>
+            <li>Intégration paiement</li>
+            <li>Interface administrateur</li>
+        </ul>
+        
+        <h4>Sprint 3 (15 Jours) - Finalisation</h4>
+        <ul class="checklist">
+            <li>Tests et optimisation</li>
+            <li>Documentation technique</li>
+            <li>Déploiement staging</li>
+            <li>Recette utilisateur</li>
+        </ul>
+    </div>
+
+    <div id="contribution" class="section">
+        <h2 class="section-title">👥 Contribution</h2>
+        
+        <h3>Comment Contribuer?</h3>
+        <ol>
+            <li><strong>Rejoindre l'équipe</strong>: yemalindev2002@gmail.com</li>
+            <li><strong>S'assigner une tâche</strong>: Via board projet GitHub</li>
+            <li><strong>Soumettre PR</strong>: Review obligatoire avant merge</li>
+            <li><strong>Tests</strong>: Validation sur environnement staging</li>
+        </ol>
+        
+        <h3>Rôles Recherchés</h3>
+        <ul>
+            <li><strong>Développeurs Fullstack</strong> (React/Node.js)</li>
+            <li><strong>Designers UI/UX</strong></li>
+            <li><strong>Testeurs QA</strong></li>
+            <li><strong>DevOps Engineer</strong></li>
+        </ul>
+        
+        <h3>Communication</h3>
+        <ul>
+            <li><strong>Discord</strong>: Canal #voyagebj-dev</li>
+            <li><strong>GitHub</strong>: Repository privé</li>
+            <li><strong>Réunions</strong>: Weekly sync (Vendredi 20h)</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2 class="section-title">📞 Contact et Coordination</h2>
+        
+        <p><strong>Lead Technique</strong>: ~GH0ST136!~</p>
+        <p><strong>Email</strong>: yemalindev2002@gmail.com</p>
+        <p><strong>Plateforme</strong>: [Rejoins l'équipe]</p>
+        <p><strong>Documentation</strong>: [La documentation du projet sur GitHub]</p>
+    </div>
+
+    <div class="footer">
+        <p><em>Document version: 1.0<br>
+        Dernière mise à jour: [Date]<br>
+        Status: En cours de développement</em></p>
+        
+        <p><strong>Ensemble, faisons du voyage numérique au Bénin une réalité !</strong> 🌍✨</p>
+        
+        <div class="tags">
+            <span class="tag">#VoyageBJ</span>
+            <span class="tag">#Startup</span>
+            <span class="tag">#Innovation</span>
+            <span class="tag">#Bénin</span>
+            <span class="tag">#Transport</span>
+            <span class="tag">#Digitalisation</span>
+        </div>
+    </div>
+
+    <script>
+        // Ajouter la date actuelle
+        document.querySelector('em').innerHTML = document.querySelector('em').innerHTML.replace('[Date]', new Date().toLocaleDateString('fr-FR'));
+        
+        // Fonction pour générer le PDF
+        function generatePDF() {
+            window.print();
+        }
+        
+        // Auto-générer le PDF si demandé
+        if (window.location.search.includes('pdf=true')) {
+            setTimeout(generatePDF, 1000);
+        }
+    </script>
+</body>
+</html>

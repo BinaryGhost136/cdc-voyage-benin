@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation VoyageBJ - Plateforme de Réservation de Transport</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 1.5cm;
+            @bottom-center {
+                content: "Page " counter(page) " sur " counter(pages);
+                font-size: 10px;
+                color: #666;
+            }
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 20px;
+            font-size: 12px;
+            background: #ffffff;
+        }
+        
+        .page-break {
+            page-break-before: always;
+        }
+        
+        .no-break {
+            page-break-inside: avoid;
+        }
+        
+        /* Header Styles */
+        .document-header {
+            text-align: center;
+            border-bottom: 4px solid #2c5aa0;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #2c5aa0 0%, #1e3a8a 100%);
+            color: white;
+            padding: 30px 20px;
+            border-radius: 8px;
+            margin-top: 0;
+        }
+        
+        .document-title {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .document-subtitle {
+            font-size: 18px;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+        
+        .document-version {
+            background: rgba(255,255,255,0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            display: inline-block;
+            font-size: 14px;
+        }
+        
+        /* Section Styles */
+        .section {
+            margin-bottom: 25px;
+            page-break-inside: avoid;
+        }
+        
+        .section-title {
+            background: linear-gradient(135deg, #2c5aa0, #1e3a8a);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            font-size: 16px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-title::before {
+            content: "▶";
+            font-size: 12px;
+        }
+        
+        .subsection {
+            margin: 15px 0;
+            padding-left: 10px;
+        }
+        
+        .subsection-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #2c5aa0;
+            margin-bottom: 8px;
+            border-left: 3px solid #2c5aa0;
+            padding-left: 10px;
+        }
+        
+        /* Table Styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0;
+            font-size: 11px;
+            page-break-inside: avoid;
+        }
+        
+        th {
+            background: #2c5aa0;
+            color: white;
+            font-weight: 600;
+            padding: 10px 8px;
+            text-align: left;
+        }
+        
+        td {
+            padding: 8px;
+            border: 1px solid #ddd;
+            vertical-align: top;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        /* Code Blocks */
+        .code-block {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-left: 4px solid #2c5aa0;
+            padding: 12px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+            white-space: pre-wrap;
+            border-radius: 0 4px 4px 0;
+            page-break-inside: avoid;
+        }
+        
+        /* Status Badges */
+        .status-badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: 600;
+            margin: 2px;
+        }
+        
+        .status-completed {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status-in-progress {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .status-planned {
+            background: #cce7ff;
+            color: #004085;
+        }
+        
+        /* Feature Grid */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 15px 0;
+        }
+        
+        .feature-card {
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
+            padding: 12px;
+            background: #f8f9fa;
+        }
+        
+        .feature-card h4 {
+            color: #2c5aa0;
+            margin-bottom: 8px;
+            font-size: 13px;
+        }
+        
+        /* Architecture Diagram */
+        .architecture-layer {
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            margin: 10px 0;
+            padding: 12px;
+            background: white;
+        }
+        
+        .layer-title {
+            font-weight: 600;
+            color: #2c5aa0;
+            margin-bottom: 8px;
+            font-size: 13px;
+        }
+        
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tech-item {
+            background: #e3f2fd;
+            color: #2c5aa0;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 500;
+        }
+        
+        /* Installation Steps */
+        .installation-step {
+            background: #f8f9fa;
+            border-left: 3px solid #2c5aa0;
+            padding: 10px 15px;
+            margin: 8px 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .step-number {
+            background: #2c5aa0;
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            margin-right: 8px;
+        }
+        
+        /* Footer */
+        .document-footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #e9ecef;
+            font-size: 10px;
+            color: #666;
+        }
+        
+        .contact-info {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+        }
+        
+        /* Print Optimizations */
+        @media print {
+            body {
+                padding: 0;
+                font-size: 10px;
+            }
+            
+            .section {
+                page-break-inside: avoid;
+            }
+            
+            table {
+                page-break-inside: avoid;
+            }
+            
+            .code-block {
+                page-break-inside: avoid;
+            }
+            
+            .no-print {
+                display: none;
+            }
+        }
+        
+        /* Lists */
+        ul, ol {
+            margin: 8px 0;
+            padding-left: 20px;
+        }
+        
+        li {
+            margin: 4px 0;
+        }
+        
+        /* Highlights */
+        .highlight {
+            background: #fff3cd;
+            padding: 10px;
+            border-left: 4px solid #ffc107;
+            margin: 10px 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .warning {
+            background: #f8d7da;
+            padding: 10px;
+            border-left: 4px solid #dc3545;
+            margin: 10px 0;
+            border-radius: 0 4px 4px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Page 1: Cover Page -->
+    <div class="document-header">
+        <h1 class="document-title">🚀 VoyageBJ</h1>
+        <p class="document-subtitle">Plateforme de Réservation de Transport au Bénin</p>
+        <div class="document-version">Version 1.0.0 - Bêta</div>
+    </div>
+
+    <div class="section">
+        <h2 class="section-title">📋 Documentation Technique Complète</h2>
+        
+        <div class="highlight">
+            <strong>📅 Date de Génération:</strong> <span id="current-date"></span><br>
+            <strong>👨‍💻 Équipe:</strong> ~GH0ST136!~ & Contributeurs<br>
+            <strong>🎯 Statut:</strong> Développement Actif
+        </div>
+        
+        <div class="subsection">
+            <h3 class="subsection-title">📖 Table des Matières</h3>
+            <ol>
+                <li>Présentation du Projet</li>
+                <li>Architecture Technique</li>
+                <li>Guide d'Installation</li>
+                <li>Environnements</li>
+                <li>Fonctionnalités Détaillées</li>
+                <li>API Documentation</li>
+                <li>Guide de Contribution</li>
+                <li>Déploiement et Production</li>
+                <li>Support et Maintenance</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- Page 2: Project Overview -->
+    <div class="page-break"></div>
+    
+    <div class="section">
+        <h2 class="section-title">🎯 Présentation du Projet</h2>
+        
+        <div class="subsection">
+            <h3 class="subsection-title">Vision et Mission</h3>
+            <p><strong>VoyageBJ</strong> est une plateforme numérique innovante qui révolutionne l'expérience de réservation de billets de transport au Bénin. Notre mission est de digitaliser le secteur du transport terrestre en connectant efficacement les voyageurs avec les compagnies de transport.</p>
+        </div>
+        
+        <div class="subsection">
+            <h3 class="subsection-title">🎯 Objectifs Stratégiques</h3>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>🏗️ Centralisation</h4>
+                    <p>Offrir un point d'accès unique pour toutes les compagnies de transport terrestre au Bénin</p>
+                </div>
+                <div class="feature-card">
+                    <h4>💻 Digitalisation</h4>
+                    <p>Transformer les processus manuels en flux numériques automatisés</p>
+                </div>
+                <div class="feature-card">
+                    <h4>🔒 Sécurisation</h4>
+                    <p>Garantir la sécurité des transactions et des données utilisateurs</p>
+                </div>
+                <div class="feature-card">
+                    <h4>⚡ Optimisation</h4>
+                    <p>Améliorer l'efficacité opérationnelle pour toutes les parties prenantes</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="subsection">
+            <h3 class="subsection-title">📊 Périmètre du Projet</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Scope Inclus (v1.0)</th>
+                        <th>Scope Exclu (v1.0)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <ul>
+                                <li>Plateforme web responsive</li>
+                                <li>Système de réservation temps réel</li>
+                                <li>Module de paiement sécurisé</li>
+                                <li>Gestion multi-compagnies</li>
+                                <li>Interface administrateur</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li>Application mobile native</li>
+                                <li>Système de fidélisation</li>
+                                <li>Intégration internationale</li>
+                                <li>Services logistiques additionnels</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Page 3: Technical Architecture -->
+    <div class="page-break"></div>
+    
+    <div class="section">
+        <h2 class="section-title">🏗️ Architecture Technique</h2>
+        
+        <div class="subsection">
+            <h3 class="subsection-title">📚 Stack Technologique Complète</h3>
+            
+            <div class="architecture-layer">
+                <div class="layer-title">🎨 Frontend</div>
+                <div class="tech-stack">
+                    <span class="tech-item">React.js 18+</span>
+                    <span class="tech-item">TypeScript</span>
+                    <span class="tech-item">Tailwind CSS</span>
+                    <span class="tech-item">Redux Toolkit</span>
+                    <span class="tech-item">React Query</span>
+                    <span class="tech-item">Axios</span>
+                </div>
+            </div>
+            
+            <div class="architecture-layer">
+                <div class="layer-title">⚙️ Backend</div>
+                <div class="tech-stack">
+                    <span class="tech-item">Node.js 18+</span>
+                    <span class="tech-item">Express.js</span>
+                    <span class="tech-item">PostgreSQL 14+</span>
+                    <span class="tech-item">Redis 7+</span>
+                    <span class="tech-item">JWT</span>
+                    <span class="tech-item">Bcrypt</span>
+                </div>
+            </div>
+            
+            <div class="architecture-layer">
+                <div class="layer-title">🛠️ Infrastructure</div>
+                <div class="tech-stack">
+                    <span class="tech-item">Docker & Docker Compose</span>
+                    <span class="tech-item">AWS EC2</span>
+                    <span class="tech-item">Nginx</span>
+                    <span class="tech-item">PM2</span>
+                    <span class="tech-item">GitHub Actions</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="subsection">
+            <h3 class="subsection-title">🗃️ Structure de la Base de Données</h3>
+            <div class="code-block">
+-- Tables Principales
+users (id, email, phone, password_hash, profile_data, created_at, updated_at)
+companies (id, name, contact_info, status, created_at)
+routes (id, departure_city, arrival_city, distance, duration, created_at)
+trips (id, route_id, company_id, departure_time, arrival_time, price, available_seats)
+bookings (id, user_id, trip_id, seats, total_amount, status, created_at)
+payments (id, booking_id, method, amount, status, transaction_id, created_at)
+
+-- Tables de Support
+cities (id, name, region, coordinates)
+vehicles (id, company_id, plate_number, capacity, features)
+reviews (id, booking_id, rating, comment, created_at)
+            </div>
+        </div>
+        
+        <div class="subsection">
+            <h3 class="subsection-title">📁 Structure du Projet</h3>
+            <div class="code-block">
+voyagebj-platform/
+├── 📁 client/                 # Application Frontend React
+│   ├── public/
+│   └── src/
+│       ├── components/        # Composants réutilisables
+│       ├── pages/            # Pages de l'application
+│       ├── hooks/            # Custom React hooks
+│       ├── store/            # Configuration Redux
+│       ├── services/         # Appels API
+│       └── utils/            # Helper functions
+├── 📁 server/                 # API Backend Node.js
+│   ├── src/
+│   │   ├── controllers/      # Logique métier
+│   │   ├── models/           # Modèles Sequelize
+│   │   ├── routes/           # Routes API
+│   │   ├── middleware/       # Middlewares custom
+│   │   ├── services/         # Services métier
+│   │   └── config/           # Configuration
+│   └── migrations/           # Migrations base de données
+├── 📁 infrastructure/         # Configuration DevOps
+│   ├── docker/
+│   ├── nginx/
+│   └── scripts/
+├── 📁 docs/                   # Documentation
+└── docker-compose.yml         # Configuration Docker
+            </div>
+        </div>
+    </div>
+
+    <!-- Page 4: Installation Guide -->
+    <div class="page-break"></div>
+    
+    <div class="section">
+        <h2 class="section-title">🚀 Guide d'Installation</h2>
+        
+        <div class="subsection">
+            <h3 class="subsection-title">📋 Prérequis Système</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Composant</th>
+                        <th>Version Requise</th>
+                        <th>Version Recommandée</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Node.js</td>
+                        <td>16.0+</td>
+                        <td>18.0+ LTS</td>
+                    </tr>
+                    <tr>
+                        <td>PostgreSQL</td>
+                        <td>12.0+</td>
+                        <td>14.0+</td>
+                    </tr>
+                    <tr>
+                        <td>Redis</td>
+                        <td>6.0+</td>
+                        <td>7.0+</td>
+                    </tr>
+                    <tr>
+                        <td>Docker</td>
+                        <td>20.0+</td>
+                        <td>24.0+</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="subsection">
+            <h3 class="subsection-title">⚡ Installation avec Docker (Recommandé)</h3>
+            
+            <div class="installation-step">
+                <span class="step-number">1</span>
+                <strong>Cloner le repository</strong>
+                <div class="code-block">git clone < URL du repository >
+cd voyagebj-platform</div>
+            </div>
+            
+            <div class="installation-step">
+                <span class="step-number">2</span>
+                <strong>Configuration de l'environnement</strong>
+                <div class="code-block">cp .env.example .env
+# Éditer le fichier .env avec vos configurations</div>
+            </div>
+            
+            <div class="installation-step">
+                <span class="step-number">3</span>
+                <strong>Démarrage des services</strong>
+                <div class="code-block">docker-compose up -d</div>
+            </div>
+            
+            <div class="installation-step">
+                <span class="step-number">4</span>
+                <strong>Initialisation de la base de données</strong>
+                <div class="code-block">docker-compose exec server npm run db:create
+docker-compose exec server npm run db:migrate
+docker-compose exec server npm run db:seed</div>
+            </div>
+        </div>
+        
+        <div class="subsection">
+            <h3 class="subsection-title">🔧 Installation Manuelle</h3>
+            
+            <div class="installation-step">
+                <span class="step-number">1</span>
+                <strong>Backend Setup</strong>
+                <div class="code-block">cd server
+npm install
+npm run db:create
+npm run db:migrate
+npm run db:seed
+npm run dev</div>
+            </div>
+            
+            <div class="installation-step">
+                <span class="step-number">2</span>
+                <strong>Frontend Setup</strong>
+                <div class="code-block">cd client
+npm install
+npm start</div>
+            </div>
+        </div>
+        
+        <div class="subsection">
+            <h3 class="subsection-title">⚙️ Variables d'Environnement</h3>
+            <div class="code-block">
+# Database
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=voyagebj
+DB_USER=postgres
+DB_PASS=your_secure_password
+
+# JWT Configuration
+JWT_SECRET=your_super_secret_jwt_key
+JWT_EXPIRES_IN=7d
+
+# Redis
+REDIS_URL=redis://localhost:6379
+
+# Server
+NODE_ENV=development
+API_PORT=5000
+CLIENT_URL=http://localhost:3000
+
+# Payment Gateways
+FLUTTERWAVE_PUBLIC_KEY=pk_test_...
+FLUTTERWAVE_SECRET_KEY=sk_test_...
+            </div>
+        </div>
+    </div>
+
+    <!-- Page 5: Features & API -->
+    <div class="page-break"></div>
+    
+    <div class="section">
+        <h2 class="section-title">⚙️ Fonctionnalités Détaillées</h2>
+        
+        <div class="subsection">
+            <h3 class="subsection-title">👤 Module Utilisateur</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Fonctionnalité</th>
+                        <th>Description</th>
+                        <th>Statut</th>
+                        <th>Priorité</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Inscription/Connexion</td>
+                        <td>Authentification sécurisée avec validation email</td>
+                        <td><span class="status-badge status-completed">Terminé</span></td>
+                        <td>Élevée</td>
+                    </tr>
+                    <tr>
+                        <td>Recherche de trajets</td>
+                        <td>Moteur de recherche avec filtres avancés</td>
+                        <td><span class="status-badge status-completed">Terminé</span></td>
+                        <td>Élevée</td>
+                    </tr>
+                    <tr>
+                        <td>Réservation en ligne</td>
+                        <td>Sélection de sièges et informations voyageurs</td>
+                        <td><span class="status-badge status-in-progress">En Cours</span></td>
+                        <td>Élevée</td>
+                    </tr>
+                    <tr>
+                        <td>Paiement sécurisé</td>
+                        <td>Intégration Mobile Money et cartes bancaires</td>
+                        <td><span class="status-badge status-in-progress">En Cours</span></td>
+                        <td>Élevée</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="subsection">
+            <h3 class="subsection-title">🛠️ Module Administrateur</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Fonctionnalité</th>
+                        <th>Description</th>
+                        <th>Statut</th>
+                        <th>Priorité</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Gestion des compagnies</td>
+                        <td>CRUD complet des opérateurs de transport</td>
+                        <td><span class="status-badge status-completed">Terminé</span></td>
+                        <td>Élevée</td>
+                    </tr>
+                    <tr>
+                        <td>Gestion des trajets</td>
+                        <td>Configuration des horaires et tarifs</td>
+                        <td><span class="status-badge status-in-progress">En Cours</span></td>
+                        <td>Élevée</td>
+                    </tr>
+                    <tr>
+                        <td>Tableaux de bord</td>
+                        <td>Analytics et reporting des performances</td>
+                        <td><span class="status-badge status-planned">Planifié</span></td>
+                        <td>Moyenne</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Page 6: API Documentation -->
+    <div class="page-break"></div>
+    
+    <div class="section">
+        <h2 class="section-title">🔗 API Documentation</h2>
+        
+        <div class="subsection">
+            <h3 class="subsection-title">🔐 Endpoints d'Authentification</h3>
+            
+            <div class="code-block">
+POST /api/auth/register
+Content-Type: application/json
+
+{
+  "email": "user@example.com",
+  "password": "securepassword",
+  "phone": "+229XXXXXXXX",
+  "firstName": "John",
+  "lastName": "Doe"
+}
+
+Response:
+{
+  "success": true,
+  "data": {
+    "user": { ... },
+    "token": "jwt_token_here"
+  }
+}
+            </div>
+            
+            <div class="code-block">
+POST /api/auth/login
+Content-Type: application/json
+
+{
+  "email": "user@example.com",
+  "password": "securepassword"
+}
+
+Response:
+{
+  "success": true,
+  "data": {
+    "user": { ... },
+    "token": "jwt_token_here"
+  }
+}
+            </div>
+        </div>
+        
+        <div class="subsection">
+            <h3 class="subsection-title">🔍 Endpoints de Recherche</h3>
+            
+            <div class="code-block">
+GET /api/trips/search?from=Cotonou&to=Parakou&date=2024-01-15&passengers=2
+
+Response:
+{
+  "success": true,
+  "data": {
+    "trips": [
+      {
+        "id": 1,
+        "departureTime": "2024-01-15T08:00:00Z",
+        "arrivalTime": "2024-01-15T12:30:00Z",
+        "price": 4500,
+        "availableSeats": 15,
+        "company": {
+          "name": "Transport Express",
+          "rating": 4.5
+        }
+      }
+    ]
+  }
+}
+            </div>
+        </div>
+        
+        <div class="subsection">
+            <h3 class="subsection-title">🎫 Endpoints de Réservation</h3>
+            
+            <div class="code-block">
+POST /api/bookings
+Authorization: Bearer {jwt_token}
+Content-Type: application/json
+
+{
+  "tripId": 1,
+  "seats": 2,
+  "passengers": [
+    {
+      "firstName": "John",
+      "lastName": "Doe",
+      "documentType": "ID",
+      "documentNumber": "123456789"
+    }
+  ]
+}
+
+Response:
+{
+  "success": true,
+  "data": {
+    "booking": {
+      "id": 123,
+      "status": "confirmed",
+      "totalAmount": 9000,
+      "reference": "VJBJ2024000123"
+    }
+  }
+}
+            </div>
+        </div>
+    </div>
+
+    <!-- Page 7: Contribution & Deployment -->
+    <div class="page-break"></div>
+    
+    <div class="section">
+        <h2 class="section-title">👥 Guide de Contribution</h2>
+        
+        <div class="subsection">
+            <h3 class="subsection-title">📝 Processus de Contribution</h3>
+            
+            <div class="installation-step">
+                <span class="step-number">1</span>
+                <strong>Fork du Repository</strong>
+                <p>Créer un fork du projet sur GitHub</p>
+            </div>
+            
+            <div class="installation-step">
+                <span class="step-number">2</span>
+                <strong>Création d'une Branche</strong>
+                <div class="code-block">git checkout -b feature/nouvelle-fonctionnalite
+# ou
+git checkout -b fix/correction-bug</div>
+            </div>
+            
+            <div class="installation-step">
+                <span class="step-number">3</span>
+                <strong>Développement et Tests</strong>
+                <p>Implémenter les changements et exécuter les tests</p>
+                <div class="code-block">npm test
+npm run lint
+npm run build</div>
+            </div>
+            
+            <div class="installation-step">
+                <span class="step-number">4</span>
+                <strong>Soumission de Pull Request</strong>
+                <p>Créer une PR avec une description claire des changements</p>
+            </div>
+        </div>
+        
+        <div class="subsection">
+            <h3 class="subsection-title">🎯 Standards de Code</h3>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Élément</th>
+                        <th>Standard</th>
+                        <th>Outils</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Formatage</td>
+                        <td>Prettier</td>
+                        <td>.prettierrc</td>
+                    </tr>
+                    <tr>
+                        <td>Linting</td>
+                        <td>ESLint</td>
+                        <td>.eslintrc.js</td>
+                    </tr>
+                    <tr>
+                        <td>Commits</td>
+                        <td>Conventional Commits</td>
+                        <td>commitlint</td>
+                    </tr>
+                    <tr>
+                        <td>Tests</td>
+                        <td>Jest + Testing Library</td>
+                        <td>jest.config.js</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="subsection">
+            <h3 class="subsection-title">🚀 Déploiement en Production</h3>
+            
+            <div class="installation-step">
+                <span class="step-number">1</span>
+                <strong>Build des Applications</strong>
+                <div class="code-block"># Frontend
+cd client && npm run build
+
+# Backend
+cd server && npm run build</div>
+            </div>
+            
+            <div class="installation-step">
+                <span class="step-number">2</span>
+                <strong>Déploiement avec Docker</strong>
+                <div class="code-block">docker-compose -f docker-compose.prod.yml build
+docker-compose -f docker-compose.prod.yml up -d</div>
+            </div>
+            
+            <div class="installation-step">
+                <span class="step-number">3</span>
+                <strong>Vérification</strong>
+                <div class="code-block"># Vérifier les logs
+docker-compose logs -f
+
+# Vérifier la santé
+curl https://voyagebj.bj/api/health</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page 8: Support & Contact -->
+    <div class="page-break"></div>
+    
+    <div class="section">
+        <h2 class="section-title">📞 Support et Maintenance</h2>
+        
+        <div class="subsection">
+            <h3 class="subsection-title">🛠️ Canaux de Support</h3>
+            
+            <div class="contact-info">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td><strong>📧 Email Technique</strong></td>
+                            <td>yemalindev2002@gmail.com</td>
+                        </tr>
+                        <tr>
+                            <td><strong>💬 Slack Communauté</strong></td>
+                            <td>#voyagebj-dev</td>
+                        </tr>
+                        <tr>
+                            <td><strong>🐛 Issues GitHub</strong></td>
+                            <td>github.com/voyagebj/platform/issues</td>
+                        </tr>
+                        <tr>
+                            <td><strong>📚 Documentation</strong></td>
+                            <td>docs.voyagebj.bj</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div class="subsection">
+            <h3 class="subsection-title">🔧 Maintenance et Monitoring</h3>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Composant</th>
+                        <th>Outil</th>
+                        <th>Usage</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Monitoring Application</td>
+                        <td>PM2</td>
+                        <td>Gestion des processus</td>
+                    </tr>
+                    <tr>
+                        <td>Surveillance Serveur</td>
+                        <td>AWS CloudWatch</td>
+                        <td>Métriques et logs</td>
+                    </tr>
+                    <tr>
+                        <td>Base de Données</td>
+                        <td>pgAdmin</td>
+                        <td>Administration PostgreSQL</td>
+                    </tr>
+                    <tr>
+                        <td>Cache</td>
+                        <td>Redis Insight</td>
+                        <td>Monitoring Redis</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="subsection">
+            <h3 class="subsection-title">🚨 Procédures d'Urgence</h3>
+            
+            <div class="warning">
+                <strong>Application inaccessible</strong>
+                <ul>
+                    <li>Vérifier les logs: <code>docker-compose logs</code></li>
+                    <li>Redémarrer les services: <code>docker-compose restart</code></li>
+                    <li>Vérifier l'espace disque</li>
+                </ul>
+            </div>
+            
+            <div class="warning">
+                <strong>Base de données corrompue</strong>
+                <ul>
+                    <li>Restaurer depuis la dernière sauvegarde</li>
+                    <li>Vérifier les connexions</li>
+                    <li>Exécuter <code>npm run db:health-check</code></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Final Page: Footer -->
+    <div class="page-break"></div>
+    
+    <div class="document-footer">
+        <h3>VoyageBJ - Documentation Technique</h3>
+        <p><strong>Version:</strong> 1.0.0-beta | <strong>Dernière mise à jour:</strong> <span id="update-date"></span></p>
+        
+        <div class="contact-info">
+            <h4>📞 Contact et Liens Utiles</h4>
+            <table>
+                <tbody>
+                    <tr>
+                        <td><strong>Site Web</strong></td>
+                        <td>https://voyagebj.bj</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Documentation</strong></td>
+                        <td>https://docs.voyagebj.bj</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Repository</strong></td>
+                        <td>https://github.com/voyagebj/platform</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Email Principal</strong></td>
+                        <td>yemalindev2002@gmail.com</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div style="margin-top: 20px;">
+            <p><strong>🧑‍💻 Équipe de Développement:</strong> Yemalin Dev & Contributeurs</p>
+            <p><strong>📍 Localisation:</strong> Bénin, Afrique
